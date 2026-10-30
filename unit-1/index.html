@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BookNest Library Management System - Unit 1 static dashboard">
+    <title>BookNest Library - Unit 1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container navbar">
+            <h1 class="logo">📚 BookNest <small>Library Management System</small></h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Dashboard</a></li>
+                    <li><a href="add-book.html">Add Book</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h2 class="page-title">Library Dashboard</h2>
+        <p class="page-sub">Overview of the central library catalogue.</p>
+
+        <!-- Summary Stats Cards -->
+        <section class="stats-section">
+            <article class="card stat-card">
+                <h3>Total Titles</h3>
+                <p class="stat-number">8</p>
+            </article>
+            <article class="card stat-card">
+                <h3>Total Copies</h3>
+                <p class="stat-number">46</p>
+            </article>
+            <article class="card stat-card">
+                <h3>Genres</h3>
+                <p class="stat-number">6</p>
+            </article>
+            <article class="card stat-card">
+                <h3>Issued Today</h3>
+                <p class="stat-number">5</p>
+            </article>
+        </section>
+
+        <!-- Book Catalogue Table -->
+        <section class="card">
+            <div class="card-header">
+                <h2>Book Catalogue</h2>
+                <a href="add-book.html" class="btn btn-primary">+ Add New Book</a>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <caption class="d-none">List of books in the library</caption>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title / Author</th>
+                            <th>ISBN</th>
+                            <th>Genre</th>
+                            <th>Copies</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><div class="book-title">Clean Code</div><div class="book-author">Robert C. Martin</div></td>
+                            <td><code>9780132350884</code></td>
+                            <td><span class="badge badge-genre">Technology</span></td>
+                            <td>6</td>
+                            <td><span class="badge badge-success">Available</span></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><div class="book-title">Wings of Fire</div><div class="book-author">A. P. J. Abdul Kalam</div></td>
+                            <td><code>9788173711466</code></td>
+                            <td><span class="badge badge-genre">Biography</span></td>
+                            <td>8</td>
+                            <td><span class="badge badge-success">Available</span></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><div class="book-title">The Alchemist</div><div class="book-author">Paulo Coelho</div></td>
+                            <td><code>9780062315007</code></td>
+                            <td><span class="badge badge-genre">Fiction</span></td>
+                            <td>5</td>
+                            <td><span class="badge badge-warning">Few Left</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><div class="book-title">A Brief History of Time</div><div class="book-author">Stephen Hawking</div></td>
+                            <td><code>9780553380163</code></td>
+                            <td><span class="badge badge-genre">Science</span></td>
+                            <td>4</td>
+                            <td><span class="badge badge-success">Available</span></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><div class="book-title">Introduction to Algorithms</div><div class="book-author">Thomas H. Cormen</div></td>
+                            <td><code>9780262046305</code></td>
+                            <td><span class="badge badge-genre">Technology</span></td>
+                            <td>10</td>
+                            <td><span class="badge badge-success">Available</span></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><div class="book-title">Sapiens</div><div class="book-author">Yuval Noah Harari</div></td>
+                            <td><code>9780062316097</code></td>
+                            <td><span class="badge badge-genre">History</span></td>
+                            <td>3</td>
+                            <td><span class="badge badge-warning">Few Left</span></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><div class="book-title">Atomic Habits</div><div class="book-author">James Clear</div></td>
+                            <td><code>9780735211292</code></td>
+                            <td><span class="badge badge-genre">Self-Help</span></td>
+                            <td>0</td>
+                            <td><span class="badge badge-danger">All Issued</span></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><div class="book-title">Godaan</div><div class="book-author">Munshi Premchand</div></td>
+                            <td><code>9788171674503</code></td>
+                            <td><span class="badge badge-genre">Fiction</span></td>
+                            <td>10</td>
+                            <td><span class="badge badge-success">Available</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Genres -->
+        <section class="card">
+            <h2 class="page-title" style="font-size:1.3rem;margin-bottom:12px">Genres in Collection</h2>
+            <ul class="genre-list">
+                <li>Technology</li>
+                <li>Fiction</li>
+                <li>Science</li>
+                <li>Biography</li>
+                <li>History</li>
+                <li>Self-Help</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+        &copy; 2026 BookNest Library &middot; Unit 1 &ndash; HTML5 &amp; CSS3
+    </footer>
+
+</body>
+</html>

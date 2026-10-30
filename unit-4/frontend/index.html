@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookNest Library - Unit 4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container navbar">
+            <h1 class="logo">📚 BookNest <small>Library Management System &middot; Unit 4</small></h1>
+            <div class="nav-actions">
+                <button id="refreshBtn" class="btn btn-secondary btn-sm">⟳ Refresh</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="statusBanner" class="status-banner status-loading">
+            <span class="status-indicator"></span>
+            <span id="statusText">Connecting to the Spring Boot REST API...</span>
+        </div>
+        <div id="alertBox" class="alert d-none"></div>
+
+        <section class="stats-section">
+            <article class="card stat-card"><h3>Total Titles</h3><p class="stat-number" id="totalCount">0</p></article>
+            <article class="card stat-card"><h3>Total Copies</h3><p class="stat-number" id="copiesCount">0</p></article>
+            <article class="card stat-card"><h3>Genres</h3><p class="stat-number" id="genreCount">0</p></article>
+        </section>
+
+        <div class="grid-2">
+            <section class="card">
+                <h2 class="page-title" style="font-size:1.3rem;margin-bottom:14px">Add Book</h2>
+                <form id="bookForm" novalidate>
+                    <div class="form-group">
+                        <label for="title">Book Title</label>
+                        <input type="text" id="title" placeholder="e.g. Clean Code">
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" id="author" placeholder="e.g. Robert C. Martin">
+                    </div>
+                    <div class="form-group">
+                        <label for="isbn">ISBN-13</label>
+                        <input type="text" id="isbn" maxlength="17" placeholder="9780132350884">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="genre">Genre</label>
+                            <select id="genre">
+                                <option value="">-- Select --</option>
+                                <option>Technology</option>
+                                <option>Fiction</option>
+                                <option>Science</option>
+                                <option>Biography</option>
+                                <option>History</option>
+                                <option>Self-Help</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="copies">Copies</label>
+                            <input type="number" id="copies" min="1" max="50" value="1">
+                        </div>
+                    </div>
+                    <span class="error-msg" id="formError"></span>
+                    <button type="submit" id="submitBtn" class="btn btn-primary btn-block">Save to Database</button>
+                </form>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <h2>Catalogue</h2>
+                    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search title, author, ISBN...">
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title / Author</th>
+                                <th>ISBN</th>
+                                <th>Genre</th>
+                                <th>Copies</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookTableBody"></tbody>
+                    </table>
+                </div>
+                <div id="loadingState" class="empty-state"><span class="icon">⏳</span>Loading books...</div>
+                <div id="noRecords" class="empty-state d-none"><span class="icon">📭</span>No books found.</div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">Unit 4 &ndash; Spring Boot REST API (port 8081) + Website</footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

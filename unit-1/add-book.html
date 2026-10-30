@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book - BookNest Unit 1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container navbar">
+            <h1 class="logo">📚 BookNest <small>Library Management System</small></h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="add-book.html" class="active">Add Book</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 class="page-title">Add a New Book</h2>
+        <p class="page-sub">Fill in the details below to register a book in the catalogue.</p>
+
+        <section class="card" style="max-width: 720px;">
+            <!-- Static HTML form (no backend in Unit 1) -->
+            <form action="#" method="post">
+
+                <div class="form-group">
+                    <label for="title">Book Title</label>
+                    <input type="text" id="title" name="title" placeholder="e.g. Clean Code" required minlength="2">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" id="author" name="author" placeholder="e.g. Robert C. Martin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="isbn">ISBN-13</label>
+                        <input type="text" id="isbn" name="isbn" placeholder="9780132350884"
+                               pattern="97[89][0-9]{10}" maxlength="13" required>
+                        <span class="hint">13 digits, starting with 978 or 979.</span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="genre">Genre</label>
+                        <select id="genre" name="genre" required>
+                            <option value="">-- Select Genre --</option>
+                            <option>Technology</option>
+                            <option>Fiction</option>
+                            <option>Science</option>
+                            <option>Biography</option>
+                            <option>History</option>
+                            <option>Self-Help</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="copies">Number of Copies</label>
+                        <input type="number" id="copies" name="copies" min="1" max="50" value="1" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="year">Published Year</label>
+                        <input type="number" id="year" name="year" min="1450" max="2026" placeholder="2008">
+                    </div>
+                    <div class="form-group">
+                        <label for="shelf">Shelf Location</label>
+                        <input type="text" id="shelf" name="shelf" placeholder="e.g. A-12">
+                    </div>
+                </div>
+
+                <fieldset>
+                    <legend>Format</legend>
+                    <div class="radio-row">
+                        <label><input type="radio" name="format" value="hardcover" checked> Hardcover</label>
+                        <label><input type="radio" name="format" value="paperback"> Paperback</label>
+                        <label><input type="radio" name="format" value="ebook"> E-Book</label>
+                    </div>
+                </fieldset>
+
+                <div class="form-group">
+                    <label for="summary">Short Summary</label>
+                    <textarea id="summary" name="summary" rows="3" placeholder="One or two lines about the book..."></textarea>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">Save Book</button>
+                    <button type="reset" class="btn btn-secondary">Clear</button>
+                    <a href="index.html" class="btn btn-secondary">Back to Dashboard</a>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        &copy; 2026 BookNest Library &middot; Unit 1 &ndash; HTML5 &amp; CSS3
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookNest Library - Unit 5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container navbar">
+            <h1 class="logo">📚 BookNest <small>Library Management System &middot; Final Project</small></h1>
+            <div class="nav-actions">
+                <a id="swaggerLink" href="/swagger-ui.html" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">API Docs</a>
+                <button id="openAddBtn" class="btn btn-gold btn-sm">+ Add Book</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="statusBanner" class="status-banner status-loading">
+            <span class="status-indicator"></span>
+            <span id="statusText">Connecting to Spring Boot REST API (port 8081)...</span>
+        </div>
+        <div id="alertBox" class="alert d-none" role="status"></div>
+
+        <!-- Stats -->
+        <section class="stats-section">
+            <article class="card stat-card"><h3>Titles</h3><p class="stat-number" id="statTitles">0</p></article>
+            <article class="card stat-card"><h3>Total Copies</h3><p class="stat-number" id="statCopies">0</p></article>
+            <article class="card stat-card"><h3>Issued Now</h3><p class="stat-number" id="statIssued">0</p></article>
+            <article class="card stat-card"><h3>Avg Rating</h3><p class="stat-number" id="statRating">0.0</p></article>
+        </section>
+
+        <div class="grid-2 grid-rev">
+            <!-- Catalogue -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>Catalogue</h2>
+                    <div class="toolbar">
+                        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Title, author, genre, ISBN...">
+                        <select id="genreFilter" aria-label="Filter by genre">
+                            <option value="">All Genres</option>
+                        </select>
+                        <label class="check"><input type="checkbox" id="lowStockOnly"> Low stock</label>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title / Author</th>
+                                <th>ISBN</th>
+                                <th>Genre</th>
+                                <th>Available</th>
+                                <th>Rating</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookTableBody"></tbody>
+                    </table>
+                </div>
+                <div id="loadingState" class="empty-state"><span class="icon">⏳</span>Loading books from the API...</div>
+                <div id="noRecords" class="empty-state d-none"><span class="icon">📭</span>No books match your filters.</div>
+            </section>
+
+            <!-- Genre breakdown -->
+            <aside class="card">
+                <h2 class="page-title" style="font-size:1.2rem;margin-bottom:12px">Collection by Genre</h2>
+                <ul id="genreBreakdown" class="breakdown"></ul>
+                <p class="hint" style="margin-top:14px">Shelf status: <span class="badge badge-success">On shelf</span> <span class="badge badge-warning">Low</span> <span class="badge badge-danger">Out</span></p>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Add / Edit Modal (one form, two modes) -->
+    <div id="bookModal" class="modal d-none" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Book</h2>
+                <button type="button" class="close-btn" data-close aria-label="Close">&times;</button>
+            </div>
+            <form id="bookForm" class="modal-form" novalidate>
+                <input type="hidden" id="bookId">
+                <div class="form-group">
+                    <label for="title">Title *</label>
+                    <input type="text" id="title" name="title" placeholder="e.g. Clean Code">
+                    <span class="error-msg" data-error="title"></span>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="author">Author *</label>
+                        <input type="text" id="author" name="author" placeholder="e.g. Robert C. Martin">
+                        <span class="error-msg" data-error="author"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="isbn">ISBN-13 *</label>
+                        <input type="text" id="isbn" name="isbn" maxlength="17" placeholder="9780132350884">
+                        <span class="error-msg" data-error="isbn"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="genre">Genre *</label>
+                        <input type="text" id="genre" name="genre" list="genreOptions" placeholder="Technology">
+                        <datalist id="genreOptions">
+                            <option>Technology</option><option>Fiction</option><option>Science</option>
+                            <option>Biography</option><option>History</option><option>Self-Help</option>
+                        </datalist>
+                        <span class="error-msg" data-error="genre"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="publishedYear">Published Year</label>
+                        <input type="number" id="publishedYear" name="publishedYear" min="1450" max="2100" placeholder="2008">
+                        <span class="error-msg" data-error="publishedYear"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="totalCopies">Total Copies *</label>
+                        <input type="number" id="totalCopies" name="totalCopies" min="1" max="100" value="1">
+                        <span class="error-msg" data-error="totalCopies"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">Rating (0–5)</label>
+                        <input type="number" id="rating" name="rating" step="0.1" min="0" max="5" placeholder="4.5">
+                        <span class="error-msg" data-error="rating"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="shelfLocation">Shelf Location</label>
+                    <input type="text" id="shelfLocation" name="shelfLocation" maxlength="20" placeholder="e.g. T-04">
+                    <span class="error-msg" data-error="shelfLocation"></span>
+                </div>
+                <span class="error-msg" id="formError"></span>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" data-close>Cancel</button>
+                    <button type="submit" id="saveBtn" class="btn btn-primary">Save Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">Unit 5 &ndash; Spring Boot 3 &middot; Spring Data JPA &middot; MySQL &middot; Swagger &middot; Full CRUD</footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

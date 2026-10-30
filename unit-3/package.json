@@ -1,0 +1,14 @@
+{
+  "name": "booknest-unit-3-mysql",
+  "version": "1.0.0",
+  "description": "BookNest Library Management System - Unit 3 (Connect MySQL with Website)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.11.0"
+  }
+}

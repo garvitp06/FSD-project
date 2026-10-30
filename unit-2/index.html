@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookNest Library - Unit 2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container navbar">
+            <h1 class="logo">📚 BookNest <small>Library Management System</small></h1>
+            <div class="nav-actions">
+                <button id="resetDataBtn" class="btn btn-secondary btn-sm">Restore Sample Data</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="alertBox" class="alert d-none"></div>
+
+        <!-- Stats (computed by JavaScript) -->
+        <section class="stats-section">
+            <article class="card stat-card"><h3>Total Titles</h3><p class="stat-number" id="totalCount">0</p></article>
+            <article class="card stat-card"><h3>Total Copies</h3><p class="stat-number" id="copiesCount">0</p></article>
+            <article class="card stat-card"><h3>Genres</h3><p class="stat-number" id="genreCount">0</p></article>
+        </section>
+
+        <div class="grid-2">
+            <!-- Add Book Form -->
+            <section class="card">
+                <h2 class="page-title" style="font-size:1.3rem;margin-bottom:14px">Add Book</h2>
+                <form id="bookForm" novalidate>
+                    <div class="form-group">
+                        <label for="title">Book Title</label>
+                        <input type="text" id="title" placeholder="e.g. Clean Code">
+                        <span class="error-msg" id="titleError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" id="author" placeholder="e.g. Robert C. Martin">
+                        <span class="error-msg" id="authorError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="isbn">ISBN-13</label>
+                        <input type="text" id="isbn" maxlength="17" placeholder="978-0132350884">
+                        <span class="error-msg" id="isbnError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="genre">Genre</label>
+                        <select id="genre">
+                            <option value="">-- Select Genre --</option>
+                            <option>Technology</option>
+                            <option>Fiction</option>
+                            <option>Science</option>
+                            <option>Biography</option>
+                            <option>History</option>
+                            <option>Self-Help</option>
+                        </select>
+                        <span class="error-msg" id="genreError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="copies">Copies</label>
+                        <input type="number" id="copies" min="1" max="50" value="1">
+                        <span class="error-msg" id="copiesError"></span>
+                    </div>
+                    <div class="actions">
+                        <button type="submit" class="btn btn-primary">Add Book</button>
+                        <button type="button" id="resetBtn" class="btn btn-secondary">Clear</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Book Table -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>Catalogue</h2>
+                    <div class="toolbar">
+                        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search title, author, ISBN...">
+                        <select id="genreFilter">
+                            <option value="">All Genres</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title / Author</th>
+                                <th>ISBN</th>
+                                <th>Genre</th>
+                                <th>Copies</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookTableBody"></tbody>
+                    </table>
+                </div>
+                <div id="noRecords" class="empty-state d-none">
+                    <span class="icon">📭</span>No books match your search.
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        Data is saved in your browser's localStorage &middot; Unit 2 &ndash; HTML, CSS &amp; JavaScript
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
